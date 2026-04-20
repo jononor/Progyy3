@@ -1,10 +1,10 @@
 package se.su.ovning3;
 
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 public class Exercise3 {
 
@@ -19,7 +19,27 @@ public class Exercise3 {
 	}
 
 	public Map<Integer, Double> importSales(String fileName) {
-		return null;
+		Map<Integer, Double> salesMap = new HashMap<>();
+
+		try (DataInputStream in = new DataInputStream(new FileInputStream(fileName))) {
+			int numberOfPosts = in.readInt();
+
+			for (int i = 0; i < numberOfPosts; i++) {
+				int year = in.readInt();
+				int month = in.readInt();
+				int day = in.readInt();
+				double value = in.readDouble();
+
+				int key = year * 100 + month;
+
+				salesMap.put(key, salesMap.getOrDefault(key, 0.0) + value);
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Filen kunde inte hittas: " + fileName);
+		} catch (IOException e) {
+			System.out.println("Fel vid läsning av filen: " + fileName);
+		}
+		return salesMap;
 	}
 
 	public List<Recording> getRecordings() {
