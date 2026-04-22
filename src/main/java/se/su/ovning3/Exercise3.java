@@ -1,9 +1,6 @@
 package se.su.ovning3;
 
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class Exercise3 {
@@ -15,8 +12,19 @@ public class Exercise3 {
 	}
 
 	public void importRecordings(String fileName) {
+		try{
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			bufferedReader.readLine();
 
+			bufferedReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.printf("%s not found%n", fileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+
 
 	public Map<Integer, Double> importSales(String fileName) {
 		Map<Integer, Double> salesMap = new HashMap<>();
