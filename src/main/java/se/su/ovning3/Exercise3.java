@@ -13,6 +13,7 @@ public class Exercise3 {
 
 	public void importRecordings(String fileName) {
 		try{
+			ArrayList<Recording> recordings = new ArrayList<>();
 			FileReader fileReader = new FileReader(fileName);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			bufferedReader.readLine();
