@@ -18,11 +18,12 @@ public class Exercise3 {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			bufferedReader.readLine();
 
-			bufferedReader.close();
+
+
 		} catch (FileNotFoundException e) {
 			System.out.printf("%s not found%n", fileName);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Fel vid läsning av filen: " + fileName);
 		}
 	}
 
