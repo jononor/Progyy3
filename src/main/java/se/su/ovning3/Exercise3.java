@@ -11,19 +11,38 @@ public class Exercise3 {
 
 	}
 
+	/**
+	 * importRecordings - tar som parameter ett filnamn och läser in det som
+	 * finns i filen (som är i formatet för importfilen, se nästa sektion), skapar
+	 * Recording-objekt av det och stoppar in dem i listan. Om någon fil med
+	 * det givna namnet inte finns ska en felutskrift om detta göras.
+	 */
+
 	public void importRecordings(String fileName) {
 		try{
-			ArrayList<Recording> recordings = new ArrayList<>();
 			FileReader fileReader = new FileReader(fileName);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			bufferedReader.readLine();
-
-
-
+			int lineCounter = Integer.parseInt(bufferedReader.readLine());
+			for (int holder = 0; holder < lineCounter; holder++) {
+				String row = bufferedReader.readLine();
+				String[] columns = row.split(";");
+				String artist = columns[0];
+				String title = columns[1];
+				int year = Integer.parseInt(columns[2]);
+				
+				int genreCount = Integer.parseInt(bufferedReader.readLine());
+				Set<String> genreSet = new HashSet<>();
+				for (int g = 0; g < genreCount; g++) {
+					String genre = bufferedReader.readLine();
+					genreSet.add(genre);
+				}
+				recordings.add(new Recording(artist, title, year, genreSet));
+			}
+			bufferedReader.close();
 		} catch (FileNotFoundException e) {
-			System.out.printf("%s not found%n", fileName);
+			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("Fel vid läsning av filen: " + fileName);
+			e.printStackTrace();
 		}
 	}
 
