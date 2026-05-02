@@ -1,28 +1,11 @@
 package se.su.ovning3;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 public class Exercise3 {
 	private final List<Recording> recordings = new ArrayList<>();
 
-	/**
-	 * exportRecordings - tar som parameter ett filnamn och skriver ut listan med
-	 * inspelningar till filen (i formatet för exportfilen).
-	 */
 	public void exportRecordings(String fileName) {
 		try {
 			FileWriter fileWriter = new FileWriter(fileName);
@@ -43,6 +26,7 @@ public class Exercise3 {
 					bufferedWriter.write("</year>");
 					bufferedWriter.newLine();
 					bufferedWriter.write("<genres>");
+					bufferedWriter.newLine();
 					for (String genre : recording.getGenre()) {
 						bufferedWriter.write("<genre>");
 						bufferedWriter.write(genre);
@@ -61,12 +45,6 @@ public class Exercise3 {
 		}
 	}
 
-	/**
-	 * importRecordings - tar som parameter ett filnamn och läser in det som
-	 * finns i filen (som är i formatet för importfilen, se nästa sektion), skapar
-	 * Recording-objekt av det och stoppar in dem i listan. Om någon fil med
-	 * det givna namnet inte finns ska en felutskrift om detta göras.
-	 */
 	public void importRecordings(String fileName) {
 		try {
 			FileReader fileReader = new FileReader(fileName);
